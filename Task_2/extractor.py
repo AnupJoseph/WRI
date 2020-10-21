@@ -3,7 +3,7 @@ import pandas as pd
 
 
 class Extractor(object):
-    def __init__(self, filename=".": str):
+    def __init__(self, filename: str):
         self.filename = filename
 
     def _clean_names(self, name="": str) -> str:
