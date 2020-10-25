@@ -1,4 +1,4 @@
-from pdf_to_excel import PdfToExcel
+from converter import PdfToExcel
 
 
 def main():
