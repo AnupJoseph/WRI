@@ -4,7 +4,7 @@ import pandas as pd
 class ExcelParser(object):
 
     @staticmethod
-    def simple_drops(dataframe):
+    def simple_drops(cls,dataframe):
         dataframe = dataframe.drop(dataframe.columns[0], axis=1)
         dataframe = dataframe.drop(dataframe.index[0], axis=0)
         return dataframe
