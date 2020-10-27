@@ -1,26 +1,24 @@
 import os
 import sys
-import argparse
+import fire
 
-from converter import PdfToExcel,DfToCsv
+from converter import PdfToExcel
 from parser import ExcelParser
 
-parser = argparse.ArgumentParser()
 
-def transformer(file):
-    
-    pdf = PdfToExcel(file)
-    exp = ExcelParser(pdf.dataframe)
-    extracted_data = exp.parse()
-    print(extracted_data)
+class Controller():
 
-def main():
-    parser.add_argument("-d",'--data',default='./data',action='store_true',dest=data,help="Print the word in upper case letters")
+    def transform(self, file):
 
-    args = parser.parse_args()
-    if args.data:
-        for files in os.listdir(args.data):
-            transformer(f"{data}/{files}")
+        pdf = PdfToExcel(file)
+        exp = ExcelParser(pdf.dataframe)
+        extracted_data = exp.parse()
+        print(extracted_data)
+
+    def parse(self, data='./data'):
+        for files in os.listdir(data):
+            self.transform(f"{data}/{files}")
+
 
 if __name__ == "__main__":
-    main()
+    fire.Fire(Controller)
