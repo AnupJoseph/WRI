@@ -21,7 +21,7 @@ class ExcelParser(object):
         combination = self.dataframe.loc[self.dataframe['Details'].str.contains(
             'Hydro') | self.dataframe['Details'].str.contains('Thermal') | self.dataframe['Details'].str.contains('Gas')]
         combination.at[2, 'Details'] = 'Hydro-electricity'
-        self.outframe = pd.concat([self.outframe, hydro])
+        self.outframe = pd.concat([self.outframe, combination])
 
     def ppn_parser(self,):
         ppn = self.dataframe.loc[self.dataframe['Details'].str.contains(
@@ -35,7 +35,10 @@ class ExcelParser(object):
         cpp.reset_index()
         self.outframe =  pd.concat([self.outframe, cpp])
     
-    
+    def non_conventional(self, ):
+        non_conv = self.dataframe.loc[self.dataframe['Details'].str.contains('Bio mass')]
+        print([non_conv.iloc[:,0].str.split('\n')])
+
     def power_purchase_total_parser(self,):
         power_total = self.dataframe.loc[self.dataframe['Details'].str.contains(
             'MTOA') | self.dataframe['Details'].str.contains('Total')]

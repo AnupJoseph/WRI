@@ -13,7 +13,7 @@ class Controller():
         pdf = PdfToExcel(file)
         exp = ExcelParser(pdf.dataframe)
         extracted_data = exp.parse()
-        print(extracted_data)
+        # print(extracted_data)
 
     def parse(self, data='./data'):
         for files in os.listdir(data):
