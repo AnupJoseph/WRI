@@ -31,6 +31,8 @@ def save_to_excel(dataframe_list,outfolder= 'excels'):
 def convert_table_to_df(document_name,table_nos = []):
     document = Document(document_name)
     outlist = []
+    if table_nos == '':
+        table_nos = list(range(len(document.tables)))
     for table in table_nos:
         input_table = document.tables[table]
         print(dir(input_table))
@@ -40,7 +42,7 @@ def convert_table_to_df(document_name,table_nos = []):
 
 
 class Controller(object):
-    def save_table(self, filename = '/content/drive/My Drive/Tariff Order 2017.docx',table_nos="2 5"):
+    def save_table(self, filename = '/content/drive/My Drive/Tariff Order 2017.docx',table_nos=""):
         table_nos = list(table_nos.split())
         outlist = convert_table_to_df(filename,table_nos)
         save_to_excel(outlist)
