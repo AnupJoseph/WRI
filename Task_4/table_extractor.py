@@ -4,6 +4,7 @@ from docx.api import Document
 import xlsxwriter
 import fire
 
+
 def table_to_df(table):
     data = []
 
@@ -18,17 +19,22 @@ def table_to_df(table):
         data.append(row_data)
 
     df = pd.DataFrame(data)
+    print(df)
     return df
 
-def save_to_excel(dataframe_list,outfolder= 'excels'):
+
+def save_to_excel(dataframe_list, outfolder='excels'):
     if not os.path.exists('excels'):
         os.makedirs('excels')
-    writer = pd.ExcelWriter('Combined_table_list.xlsx', engine='xlsxwriter')
+    writer = pd.ExcelWriter(
+        'excels/Combined_table_list.xlsx', engine='xlsxwriter')
     for tables in dataframe_list:
         tables.to_excel(writer)
+    print("Writing Done")
     writer.save()
 
-def convert_table_to_df(document_name,table_nos = []):
+
+def convert_table_to_df(document_name, table_nos=[]):
     document = Document(document_name)
     outlist = []
     if table_nos == '':
@@ -42,7 +48,14 @@ def convert_table_to_df(document_name,table_nos = []):
 
 
 class Controller(object):
-    def save_table(self, filename = '/content/drive/My Drive/Tariff Order 2017.docx',table_nos=""):
+    def save_table(self, filename='/content/drive/My Drive/Tariff Order 2017.docx', table_nos=""):
+        table_nos = str(table_nos)
         table_nos = list(table_nos.split())
-        outlist = convert_table_to_df(filename,table_nos)
+        table_nos = [int(i) for i in table_nos]
+        print(f"Tables to be converted {table_nos}")
+        outlist = convert_table_to_df(filename, table_nos)
         save_to_excel(outlist)
+
+
+if __name__ == "__main__":
+    fire.Fire(Controller)
