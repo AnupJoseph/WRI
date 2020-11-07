@@ -2,6 +2,7 @@ import pandas as pd
 import xlsxwriter
 import os
 
+
 def table_to_df(table):
     data = []
 
@@ -17,12 +18,14 @@ def table_to_df(table):
     df = pd.DataFrame(data)
     return df
 
-def save_to_excel(dataframe_list, outfolder='excels'):
+
+def save_to_excel(dataframe_list, outfolder='excels',,output_file_name="output.xlsx"sheet_name=[]):
     if not os.path.exists('excels'):
         os.makedirs('excels')
     writer = pd.ExcelWriter(
-        'excels/Combined_table_list.xlsx', engine='xlsxwriter')
-    for index,tables in enumerate(dataframe_list):
-        tables.to_excel(writer,sheet_name = f" Sheet {index+1}")
+        f'excels/{output_file_name}', engine='xlsxwriter')
+    for index, tables in enumerate(dataframe_list):
+        print(f"Writing {sheet_name[index]}")
+        tables.to_excel(writer, sheet_name=f" {sheet_name[index]}")
     print("Writing Done")
     writer.save()
