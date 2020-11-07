@@ -12,10 +12,11 @@ class DocToExcel(object):
         return f" The Document {self.filename} has {len(self.document.tables)} tables"
 
     def convert_table_to_df(self, table_list=""):
-        if table_nos == '':
+        if table_list == '':
             table_nos = list(range(len(self.document.tables)))
         else:
             table_nos = [int(i) for i in table_list.split()]
+        print(f"{len(table_nos)} are to be extracted")
         for table in table_nos:
             input_table = self.document.tables[table]
             table_dataframe = table_to_df(input_table)

@@ -1,3 +1,7 @@
+import pandas as pd
+import xlsxwriter
+import os
+
 def table_to_df(table):
     data = []
 
@@ -18,7 +22,7 @@ def save_to_excel(dataframe_list, outfolder='excels'):
         os.makedirs('excels')
     writer = pd.ExcelWriter(
         'excels/Combined_table_list.xlsx', engine='xlsxwriter')
-    for tables in dataframe_list:
-        tables.to_excel(writer)
+    for index,tables in enumerate(dataframe_list):
+        tables.to_excel(writer,sheet_name = f" Sheet {index+1}")
     print("Writing Done")
     writer.save()
