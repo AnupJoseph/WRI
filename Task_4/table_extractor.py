@@ -41,7 +41,7 @@ def convert_table_to_df(document_name, table_nos=[]):
         table_nos = list(range(len(document.tables)))
     for table in table_nos:
         input_table = document.tables[table]
-        print(dir(input_table))
+
         table_dataframe = table_to_df(input_table)
         outlist.append(table_dataframe)
     return outlist
