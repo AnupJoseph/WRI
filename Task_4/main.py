@@ -3,7 +3,7 @@ from document_extractor import DocToExcel
 from utils.table_utils import save_to_excel
 from utils.info import information
 
-def runner_function(filename,table_nos,sheet_name,output_file_name,switch):
+def runner_function(filename,table_nos,output_file_name,switch):
     document = DocToExcel(filename)
     print(document)
     outlist = document.convert_table_to_df(table_list=table_nos)
