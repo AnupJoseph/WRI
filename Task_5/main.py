@@ -8,18 +8,19 @@ from utils.save_pdf import save_page
 #     '../Task_3/raw/Mar 2016.pdf':25,
 #     '../Task_3/raw/Mar 2016.pdf':26,
 # }
-file_path = '../Task_3/raw/Mar 2016.pdf'
-page_no = [13,20,21,25,26]
+# file_path = '../Task_3//Mar 2016.pdf'
+# page_no = [13, 20, 21, 25, 26]
 
 data_dict = {
-    '../Task_3/raw/Mar 2016.pdf': [13,20,21,25,26],
-
+    'data/processed/pdf/2015/Mar 2015.pdf': [10-1,11-1],
 }
+
+
 def main():
 
-    for key,value in data_dict.items():
+    for key, value in data_dict.items():
         for page in value:
-            save_page(key,page)
+            save_page(key, page)
     # for page in page_no:
     #     save_page(file_path,page)
 

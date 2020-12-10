@@ -3,7 +3,7 @@ import fire
 def get_pdf_page(file_name='raw\Mar 20218.pdf',page=17):
     with open(file_name,'rb') as target:
         input_pdf = PdfFileReader(target)
-        print("Resolved the pdf")
+        print(f"Resolved the pdf {file_name}")
         data = input_pdf.getPage(page)
         print("Completed getting the pdf")
 
@@ -18,8 +18,8 @@ def write_pdf(data,out_file_name = 'Mar_2018',page_no=17):
 
 class Controller(object):
     def page_splitter(self,pdf_name,page_no):
-        data = get_pdf_page(pdf_name,page=page_no)
-        write_pdf(data,page_no=page_no)
+        data = get_pdf_page(file_name=pdf_name,page=int(page_no))
+        write_pdf(data,pdf_name[:-4],page_no=page_no)
 
 if __name__ == "__main__":
     fire.Fire(Controller)
